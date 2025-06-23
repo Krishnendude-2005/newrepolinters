@@ -58,3 +58,24 @@ func ListPendingTasks(tm *TaskManager) []Task {
 	}
 	return PendingTasks
 }
+func main() {
+	// Initialize TaskManager with ID generator
+	taskManager := TaskManager{
+		Tasks:     []Task{},
+		GetNextID: IDGenerator(),
+	}
+
+	// Add tasks
+	desc1 := "  Complete Go module setup  "
+	desc2 := "Push code to GitHub"
+	desc3 := "Run GitHub Actions build"
+	AddTask(&desc1, &taskManager)
+	AddTask(&desc2, &taskManager)
+	AddTask(&desc3, &taskManager)
+
+	// Complete one task
+	CompleteTask(2, &taskManager)
+
+	// List pending tasks
+	ListPendingTasks(&taskManager)
+}
